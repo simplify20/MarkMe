@@ -99,13 +99,12 @@ IF /I "%_option%" == "-s" (
 		)
 		::ECHO "Merge"
 		REM Merge content to marked_file
-		TYPE %content_temp_file%
 		TYPE %content_temp_file%>> %marked_file%
 	) ELSE (
 		REM do nothing
 	)
 	IF EXIST %content_temp_file% (
-		REM DEL %content_temp_file%
+		DEL %content_temp_file%
 	)
 	IF %ERRORLEVEL% == 0  (
 		@ECHO Marked:!clip_line!
