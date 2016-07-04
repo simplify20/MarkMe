@@ -11,7 +11,7 @@ SET inner_path=%USERPROFILE%\Documents\%mark_dir%\%inner_dir_name%
 REM
 SET marked_file=%USERPROFILE%\Documents\%mark_dir%\%marked_file_name%.md
 SET marked_file_backup=%inner_path%\%marked_file_name%.back
-::This two file will be removed after execution
+::This tmp file will be removed after execution
 SET content_temp_file=%inner_path%\marked_content.tmp
 IF NOT EXIST %USERPROFILE%\Documents\%mark_dir% (
 	MD %USERPROFILE%\Documents\%mark_dir%
