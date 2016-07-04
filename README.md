@@ -6,5 +6,6 @@ A batch script program for collecting text content from clipboard
 - Copy something in you clipboard
 - Type `$ mark -m "content description" `,and press Enter,A file named marked.md will created in "C:\Users\Administrator\Documents\MarkMe" directory
 - Type `$ mark -s` to show content of the file.
+
 ##Demo
 ![demo](https://github.com/simplify20/MarkMe/blob/master/images/demo.png)
