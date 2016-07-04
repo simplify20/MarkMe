@@ -1,4 +1,4 @@
-@ECHO OFF
+::@ECHO OFF
 SETLOCAL
 SET _option=%1
 ::Remove Quotes from a string use ~
@@ -11,7 +11,7 @@ SET inner_path=%USERPROFILE%\Documents\%mark_dir%\%inner_dir_name%
 REM
 SET marked_file=%USERPROFILE%\Documents\%mark_dir%\%marked_file_name%.md
 SET marked_file_backup=%inner_path%\%marked_file_name%.back
-::This tmp file will be removed after execution
+::This two file will be removed after execution
 SET content_temp_file=%inner_path%\marked_content.tmp
 IF NOT EXIST %USERPROFILE%\Documents\%mark_dir% (
 	MD %USERPROFILE%\Documents\%mark_dir%
@@ -32,7 +32,7 @@ IF /I "%_option%" == "-s" (
 	REM Query newest date and save to local variable
 	SETLOCAL ENABLEDELAYEDEXPANSION 
 	IF EXIST %marked_file% (
-		FOR /F  %%i IN (%marked_file%) DO (
+		FOR /F  "tokens=1 delims=" %%i IN (%marked_file%) DO (
 			SET _line=%%i
 			SET sub_line=!_line:~0,7!
 			IF [!got_date!] == [1] (
