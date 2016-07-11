@@ -30,7 +30,7 @@ IF /I "%_option%" == "-s" (
 		GOTO End
 	)
 	REM Format showing style here
-	SET format_date=###%DATE%
+	SET format_date=###
 	SET format_title=##Marked Contents
 	REM Query newest date and save to local variable
 	SETLOCAL ENABLEDELAYEDEXPANSION 
@@ -45,7 +45,8 @@ IF /I "%_option%" == "-s" (
 				ECHO !_line!>> %content_temp_file%
 			)
 			IF [!got_date!] == [] (
-				IF "!_line!" == "!format_date!" (
+				REM ###20==###20 Bug
+				IF "!_line:~0,5!" == "!format_date!20" (
 					SET newest_date=!_line:~3!
 				    SET /A got_date=1
 				) 
@@ -61,7 +62,7 @@ IF /I "%_option%" == "-s" (
 	)
 	ECHO !format_title!> %marked_file%
 	REM Do not modify here
-	ECHO !format_date!>> %marked_file%
+	ECHO !format_date!%DATE%>> %marked_file%
 	REM Use temp file to save clipboard content
 	TYPE nul > temp.txt
 	GetClip /txt >> temp.txt
@@ -83,7 +84,7 @@ IF /I "%_option%" == "-s" (
 		SET _quto=">"
 		ECHO !_quto:~1,-1!>> %marked_file%
 	)
-	TYPE temp.txt >> %marked_file%
+	TYPE temp.txt>> %marked_file%
 	IF /I "%_bold%" =="-b" (
 		ECHO.>> %marked_file%
 	)
@@ -95,7 +96,7 @@ IF /I "%_option%" == "-s" (
 	IF [!newest_date!] NEQ [] (
 		IF "!newest_date!" NEQ "!current_date!" (
 			REM Copy date to mark file
-			ECHO !newest_date!>> %marked_file%
+			ECHO !format_date!!newest_date!>> %marked_file%
 		)
 		::ECHO "Merge"
 		REM Merge content to marked_file
